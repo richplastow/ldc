@@ -20,4 +20,21 @@
       _o.O
       -> new Ldc
 
+
+
+
+      "Instance properties as expected"
+
+
+      "`ldc.items` is an array"
+      _o.A
+      -> (new Ldc).items
+
+      tudor.equal
+
+      "`ldc.items` is empty"
+      0
+      -> (new Ldc).items.length
+
+
     ];

@@ -39,6 +39,7 @@ make the source code less verbose: `_o.O == typeof x` vs `'object' == typeof x`.
     _o.E = 'error'
     _o.F = 'function'
     #       global, see build-constants, below
+    _o.I = 'integer'
     #       method, not used to avoid confusion with a method’s `M` variable
     _o.N = 'number'
     _o.O = 'object'

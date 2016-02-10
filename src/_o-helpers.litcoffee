@@ -83,7 +83,7 @@ Determines whether haystack contains a given needle. @todo arrays and objects
 Xx optional prefix. @todo description
 
     _o.uid = (p) ->
-      p + '_' + (Math.random()+'1111111111111111').slice 2, 18
+      (p||'') + '_' + (Math.random()+'1111111111111111').slice 2, 18
 
 
 
@@ -108,6 +108,59 @@ Convert a property to one of XX kinds:
           Object.defineProperty obj, name, { value:value, enumerable:true }
         when 'private'
           Object.defineProperty obj, name, { value:value, enumerable:false }
+
+
+
+
+#### `_o.validator()`
+- `M <string>`            a method-name prefix to add to exception messages
+- `obj <object>`          the object which contains the values to validate
+- `<function>`            the validator, which determines a property’s validity
+  - `signature <string>`  the value’s name and type
+  - `fallback <mixed>`    (optional) a value to use if `opt[key]` is undefined
+  - `<mixed>`             returns the valid value
+
+Creates a custom validator. 
+
+    _o.validator = (M, obj) ->
+
+      (signature, fallback) ->
+
+Get `key`, `types` and `rule` from the signature. 
+
+        matches = signature.match /^([_a-z][_a-z0-9]*)\s+<([|a-z]+)\s*(.*)>$/
+        if ! matches then throw RangeError "/jsmultrun/src/_o-helpers.litcoffee
+          _o.valid()\n  signature #{signature} is invalid"
+        [signature, key, types, rule] = matches
+
+Use the fallback, if needed. 
+
+        value = obj[key]
+        tv = _o.type value
+        if _o.U == tv
+          if 2 == arguments.length then return fallback
+          throw TypeError M + key + " is undefined and has no fallback"
+
+Check the type and rule. 
+
+        for type in types.split '|'
+          if (_o.N == type or _o.I == type) and _o.N == tv
+            if _o.I == type and value % 1
+              throw RangeError M + key + " is a number but not an integer"
+            if rule
+              [min, max] = rule.split '-'
+              if value < min or value > max
+                throw RangeError M + key + " is #{value} (must be #{rule})"
+            return value
+          if type == tv
+            if _o.S == tv and rule
+              unless RegExp(rule).test value
+                throw RangeError M + key + " fails #{rule}"
+            return value
+
+        throw TypeError M + key + " is type #{tv} not #{types}"
+
+
 
 
     ;

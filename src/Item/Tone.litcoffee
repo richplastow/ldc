@@ -14,6 +14,7 @@ Item.Tone
         M = "/ldc/src/Item/Tone.litcoffee
           Item.Tone()\n  "
 
+        super config
 
 
 

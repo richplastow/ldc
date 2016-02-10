@@ -62,7 +62,8 @@ Check that the arguments are ok.
 
 Create a new instance, and append it to `items`. 
 
-        #console.log(123, Object.keys(Item.Hit))
+        config.uid   = uid
+        config.index = @items.length
         item = new kinds[kind](config)
         @items.push item
 

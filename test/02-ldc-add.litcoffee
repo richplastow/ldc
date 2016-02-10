@@ -137,6 +137,13 @@ Prepare a test-instance.
       tudor.throw
 
 
+      "Is boolean"
+      """
+      /ldc/src/Ldc.litcoffee Ldc::add()
+        argument uid is type boolean not string"""
+      (ldc) -> ldc.add 'Hat', {}, true
+
+
       "Empty string"
       """
       /ldc/src/Ldc.litcoffee Ldc::add()

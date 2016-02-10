@@ -15,16 +15,27 @@ Item
           Item()\n  "
 
 
+Make `v()`, a function for checking that `config` properties are ok. 
+
+        v = _o.validator M + 'config.', config
+
+
 
 
 Properties
 ----------
 
 
-#### `x <xx>`
+#### `uid <string>`
 @todo describe
 
-        @x = null
+        @uid = v 'uid <string ^[a-z]\\w{1,23}$>'
+
+
+#### `index <integer>`
+@todo describe
+
+        @index = v 'index <integer 0-9999>'
 
 
 

@@ -14,6 +14,8 @@ Item.Hit
         M = "/ldc/src/Item/Hit.litcoffee
           Item.Hit()\n  "
 
+        super config
+
 
 
 

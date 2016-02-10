@@ -14,6 +14,8 @@ Item.Tone.Sine
         M = "/ldc/src/Item/Tone/Sine.litcoffee
           Item.Tone.Sine()\n  "
 
+        super config
+
 
 
 

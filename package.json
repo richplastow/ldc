@@ -1,6 +1,6 @@
 {
   "name": "ldc",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Audiovisual framework for Loop.Coop",
   "main": "build/ldc.js",
   "directories": {

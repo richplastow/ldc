@@ -30,9 +30,14 @@ Prepare a test-instance.
       tudor.equal
 
 
+      "'Hat' is a recognized class-name"
+      'Item.Hit.Hat'
+      (ldc) -> ldc.add('Hat'); ldc.items[ldc.items.length-1].C
+
+
       "'Sine' is a recognized class-name"
-      2
-      (ldc) -> ldc.add('Sine'); ldc.items.length
+      'Item.Tone.Sine'
+      (ldc) -> ldc.add('Sine'); ldc.items[ldc.items.length-1].C
 
 @todo more class-names
 
@@ -57,11 +62,11 @@ Prepare a test-instance.
       (ldc) -> ldc.add ['H','a','t']
 
 
-      "Not a recognized class-name"
+      "'Tone' is not a recognized class-name"
       """
       /ldc/src/Ldc.litcoffee Ldc::add()
-        argument kind fails ^Sine$|^Hat$"""
-      (ldc) -> ldc.add 'Xyz'
+        argument kind fails ^Hat$|^Sine$"""
+      (ldc) -> ldc.add 'Tone'
 
 
 
@@ -71,17 +76,17 @@ Prepare a test-instance.
 
 
       "An empty object"
-      3
+      4
       (ldc) -> ldc.add('Hat', {}); ldc.items.length
 
 
       "An object with arbitrary content"
-      4
+      5
       (ldc) -> ldc.add('Hat', { a:1, b:2 }); ldc.items.length
 
 
       "Can be undefined"
-      5
+      6
       (ldc) -> ldc.add('Hat', undefined); ldc.items.length
 
 
@@ -112,7 +117,7 @@ Prepare a test-instance.
 
 
       "Shortest possible uid"
-      6
+      7
       (ldc) -> ldc.add('Hat', undefined, 'aB'); ldc.items.length
 
 
@@ -122,7 +127,7 @@ Prepare a test-instance.
 
 
       "Can repeat existing uid, if case is different"
-      8
+      9
       (ldc) -> ldc.add('Hat', {}, 'aBcDeFgHiJkLmNoPqRsT123_'); ldc.items.length
 
 

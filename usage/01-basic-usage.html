@@ -83,11 +83,13 @@ addEventListener('load', function () {
   </header>
   <main>
     <nav id="actions">
-      <a href="#" class="button">ldc.add('Hat');</a><a
-         href="#" class="button">ldc.add('Sine');</a><a
-         href="#" class="button">ldc.add('Sine',{},'bassy');</a><a
-         href="#" class="button">ldc.read();</a><a
-         href="#" class="button">ldc.browse();</a>
+      <a href="#" class="button">ldc.addItem('Hat');</a><a
+         href="#" class="button">ldc.addItem('Sine');</a><a
+         href="#" class="button">ldc.addItem('Sine',{},'bassy');</a><a
+         href="#" class="button">ldc.readItem(1);</a><a
+         href="#" class="button">ldc.editItem(2,{});</a><a
+         href="#" class="button">ldc.deleteItem(3);</a><a
+         href="#" class="button">ldc.browseItems();</a>
     </nav>
     <pre id="log">Loading...</pre>
   </main>

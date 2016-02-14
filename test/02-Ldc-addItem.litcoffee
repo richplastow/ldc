@@ -1,27 +1,27 @@
-02 Ldc::add()
-=============
+02 Ldc::addItem()
+=================
 
 
     tudor.add [
-      "02 Ldc::add()"
+      "02 Ldc::addItem()"
       tudor.is
 
 
 
 
-      "`add()` is a function which returns a string"
+      "`addItem()` is a function which returns a string"
 
 Prepare a test-instance. 
 
       -> [new Ldc]
 
-      "`add()` is a function"
+      "`addItem()` is a function"
       _o.F
-      (ldc) -> ldc.add
+      (ldc) -> ldc.addItem
 
-      "`add('Hat')` returns a string"
+      "`addItem('Hat')` returns a string"
       _o.S
-      (ldc) -> ldc.add('Hat')
+      (ldc) -> ldc.addItem('Hat')
 
 
 
@@ -32,12 +32,12 @@ Prepare a test-instance.
 
       "'Hat' is a recognized class-name"
       'Item.Hit.Hat'
-      (ldc) -> ldc.add('Hat'); ldc.items[ldc.items.length-1].C
+      (ldc) -> ldc.addItem('Hat'); ldc.items[ldc.items.length-1].C
 
 
       "'Sine' is a recognized class-name"
       'Item.Tone.Sine'
-      (ldc) -> ldc.add('Sine'); ldc.items[ldc.items.length-1].C
+      (ldc) -> ldc.addItem('Sine'); ldc.items[ldc.items.length-1].C
 
 @todo more class-names
 
@@ -50,23 +50,23 @@ Prepare a test-instance.
 
       "`kind` not provided"
       """
-      /ldc/src/Ldc.litcoffee Ldc::add()
+      /ldc/src/Ldc.litcoffee Ldc::addItem()
         argument kind is undefined and has no fallback"""
-      (ldc) -> ldc.add()
+      (ldc) -> ldc.addItem()
 
 
       "An array, not a string"
       """
-      /ldc/src/Ldc.litcoffee Ldc::add()
+      /ldc/src/Ldc.litcoffee Ldc::addItem()
         argument kind is type array not string"""
-      (ldc) -> ldc.add ['H','a','t']
+      (ldc) -> ldc.addItem ['H','a','t']
 
 
       "'Tone' is not a recognized class-name"
       """
-      /ldc/src/Ldc.litcoffee Ldc::add()
+      /ldc/src/Ldc.litcoffee Ldc::addItem()
         argument kind fails ^Hat$|^Sine$"""
-      (ldc) -> ldc.add 'Tone'
+      (ldc) -> ldc.addItem 'Tone'
 
 
 
@@ -77,17 +77,17 @@ Prepare a test-instance.
 
       "An empty object"
       4
-      (ldc) -> ldc.add('Hat', {}); ldc.items.length
+      (ldc) -> ldc.addItem('Hat', {}); ldc.items.length
 
 
       "An object with arbitrary content"
       5
-      (ldc) -> ldc.add('Hat', { a:1, b:2 }); ldc.items.length
+      (ldc) -> ldc.addItem('Hat', { a:1, b:2 }); ldc.items.length
 
 
       "Can be undefined"
       6
-      (ldc) -> ldc.add('Hat', undefined); ldc.items.length
+      (ldc) -> ldc.addItem('Hat', undefined); ldc.items.length
 
 
 
@@ -98,16 +98,16 @@ Prepare a test-instance.
 
       "A `Date` object"
       """
-      /ldc/src/Ldc.litcoffee Ldc::add()
+      /ldc/src/Ldc.litcoffee Ldc::addItem()
         argument config is type date not object"""
-      (ldc) -> ldc.add 'Hat', new Date()
+      (ldc) -> ldc.addItem 'Hat', new Date()
 
 
       "Is the `null` object"
       """
-      /ldc/src/Ldc.litcoffee Ldc::add()
+      /ldc/src/Ldc.litcoffee Ldc::addItem()
         argument config is type null not object"""
-      (ldc) -> ldc.add 'Hat', null
+      (ldc) -> ldc.addItem 'Hat', null
 
 
 
@@ -118,17 +118,22 @@ Prepare a test-instance.
 
       "Shortest possible uid"
       7
-      (ldc) -> ldc.add('Hat', undefined, 'aB'); ldc.items.length
+      (ldc) ->
+        ldc.addItem 'Hat', undefined, 'aB'
+        ldc.items.length
 
 
       "Longest possible uid"
       'abcdefghijklmnopqrst123_'
-      (ldc) -> ldc.add('Hat', {}, 'abcdefghijklmnopqrst123_')
+      (ldc) ->
+        ldc.addItem 'Hat', {}, 'abcdefghijklmnopqrst123_'
 
 
       "Can repeat existing uid, if case is different"
       9
-      (ldc) -> ldc.add('Hat', {}, 'aBcDeFgHiJkLmNoPqRsT123_'); ldc.items.length
+      (ldc) ->
+        ldc.addItem 'Hat', {}, 'aBcDeFgHiJkLmNoPqRsT123_'
+        ldc.items.length
 
 
 
@@ -139,58 +144,58 @@ Prepare a test-instance.
 
       "Is boolean"
       """
-      /ldc/src/Ldc.litcoffee Ldc::add()
+      /ldc/src/Ldc.litcoffee Ldc::addItem()
         argument uid is type boolean not string"""
-      (ldc) -> ldc.add 'Hat', {}, true
+      (ldc) -> ldc.addItem 'Hat', {}, true
 
 
       "Empty string"
       """
-      /ldc/src/Ldc.litcoffee Ldc::add()
+      /ldc/src/Ldc.litcoffee Ldc::addItem()
         argument uid fails ^[a-z]\\w{1,23}$"""
-      (ldc) -> ldc.add 'Hat', {}, ''
+      (ldc) -> ldc.addItem 'Hat', {}, ''
 
 
       "Too short"
       """
-      /ldc/src/Ldc.litcoffee Ldc::add()
+      /ldc/src/Ldc.litcoffee Ldc::addItem()
         argument uid fails ^[a-z]\\w{1,23}$"""
-      (ldc) -> ldc.add 'Hat', {}, 'a'
+      (ldc) -> ldc.addItem 'Hat', {}, 'a'
 
 
       "Too long"
       """
-      /ldc/src/Ldc.litcoffee Ldc::add()
+      /ldc/src/Ldc.litcoffee Ldc::addItem()
         argument uid fails ^[a-z]\\w{1,23}$"""
-      (ldc) -> ldc.add 'Hat', {}, 'aBcDeFgHiJkLmNoPqRsT123_X'
+      (ldc) -> ldc.addItem 'Hat', {}, 'aBcDeFgHiJkLmNoPqRsT123_X'
 
 
       "Underscore is an invalid first character"
       """
-      /ldc/src/Ldc.litcoffee Ldc::add()
+      /ldc/src/Ldc.litcoffee Ldc::addItem()
         argument uid fails ^[a-z]\\w{1,23}$"""
-      (ldc) -> ldc.add 'Hat', {}, '_abc'
+      (ldc) -> ldc.addItem 'Hat', {}, '_abc'
 
 
       "Number is an invalid first character"
       """
-      /ldc/src/Ldc.litcoffee Ldc::add()
+      /ldc/src/Ldc.litcoffee Ldc::addItem()
         argument uid fails ^[a-z]\\w{1,23}$"""
-      (ldc) -> ldc.add 'Hat', {}, '1abc'
+      (ldc) -> ldc.addItem 'Hat', {}, '1abc'
 
 
       "Uppercase is an invalid first character"
       """
-      /ldc/src/Ldc.litcoffee Ldc::add()
+      /ldc/src/Ldc.litcoffee Ldc::addItem()
         argument uid fails ^[a-z]\\w{1,23}$"""
-      (ldc) -> ldc.add 'Hat', {}, 'Abc'
+      (ldc) -> ldc.addItem 'Hat', {}, 'Abc'
 
 
       "Must not contain a hyphen"
       """
-      /ldc/src/Ldc.litcoffee Ldc::add()
+      /ldc/src/Ldc.litcoffee Ldc::addItem()
         argument uid fails ^[a-z]\\w{1,23}$"""
-      (ldc) -> ldc.add 'Hat', {}, 'ab-c'
+      (ldc) -> ldc.addItem 'Hat', {}, 'ab-c'
 
 
 

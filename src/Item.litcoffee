@@ -26,10 +26,10 @@ Properties
 ----------
 
 
-#### `uid <string>`
+#### `id <string>`
 @todo describe
 
-        @uid = v 'uid <string ^[a-z]\\w{1,23}$>'
+        @id = v 'id <string ^[a-z]\\w{1,23}$>'
 
 
 #### `prev, next <Item|null>`

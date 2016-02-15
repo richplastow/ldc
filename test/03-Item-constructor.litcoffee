@@ -18,7 +18,7 @@
 
       "`new` returns an object"
       _o.O
-      -> new Item({ uid:'abc', prev:null, next:null })
+      -> new Item({ id:'abc', prev:null, next:null })
 
 
 
@@ -29,113 +29,113 @@ Prepare test-instances.
 
       ->
         [
-          new Item(     { uid:'test_item', prev:null, next:null })
-          new Item.Tone({ uid:'test_tone', prev:null, next:null })
+          new Item(     { id:'test_item', prev:null, next:null })
+          new Item.Tone({ id:'test_tone', prev:null, next:null })
         ]
 
 
-      "`Item::uid` is a string"
+      "`Item::id` is a string"
       _o.S
-      -> ( new Item({ uid:'abc', prev:null, next:null }) ).uid
+      -> ( new Item({ id:'abc', prev:null, next:null }) ).id
 
       "`Item::prev` can be null"
       _o.X
-      -> ( new Item({ uid:'abc', prev:null, next:null }) ).prev
+      -> ( new Item({ id:'abc', prev:null, next:null }) ).prev
 
       "`Item::prev` can be another Item"
       _o.O
-      (item, tone) -> ( new Item({ uid:'abc', prev:item, next:null }) ).prev
+      (item, tone) -> ( new Item({ id:'abc', prev:item, next:null }) ).prev
 
       "`Item::next` can be null"
       _o.X
-      -> ( new Item({ uid:'abc', prev:null, next:null }) ).next
+      -> ( new Item({ id:'abc', prev:null, next:null }) ).next
 
       "`Item::next` can be another Item"
       _o.O
-      (item, tone) -> ( new Item({ uid:'abc', prev:null, next:tone }) ).next
+      (item, tone) -> ( new Item({ id:'abc', prev:null, next:tone }) ).next
 
       tudor.equal
 
-      "`Item::uid` is as passed-in"
+      "`Item::id` is as passed-in"
       'abc'
-      -> ( new Item({ uid:'abc', prev:null, next:null }) ).uid
+      -> ( new Item({ id:'abc', prev:null, next:null }) ).id
 
       "`Item::prev` is as passed-in"
       'test_item'
-      (item, tone) -> ( new Item({ uid:'abc', prev:item, next:null }) ).prev.uid
+      (item, tone) -> ( new Item({ id:'abc', prev:item, next:null }) ).prev.id
 
       "`Item::next` is as passed-in"
       'test_tone'
-      (item, tone) -> ( new Item({ uid:'abc', prev:null, next:tone }) ).next.uid
+      (item, tone) -> ( new Item({ id:'abc', prev:null, next:tone }) ).next.id
 
 
 
 
-      "`config.uid` exceptions"
+      "`config.id` exceptions"
       tudor.throw
 
 
-      "No `config.uid`"
+      "No `config.id`"
       """
       /ldc/src/Item.litcoffee Item()
-        config.uid is undefined and has no fallback"""
+        config.id is undefined and has no fallback"""
       -> new Item { prev:null, next:null }
 
 
       "Is boolean"
       """
       /ldc/src/Item.litcoffee Item()
-        config.uid is type boolean not string"""
-      -> new Item { uid:true, prev:null, next:null }
+        config.id is type boolean not string"""
+      -> new Item { id:true, prev:null, next:null }
 
 
       "Empty string"
       """
       /ldc/src/Item.litcoffee Item()
-        config.uid fails ^[a-z]\\w{1,23}$"""
-      -> new Item { uid:'', prev:null, next:null }
+        config.id fails ^[a-z]\\w{1,23}$"""
+      -> new Item { id:'', prev:null, next:null }
 
 
       "Too short"
       """
       /ldc/src/Item.litcoffee Item()
-        config.uid fails ^[a-z]\\w{1,23}$"""
-      -> new Item { uid:'a', prev:null, next:null }
+        config.id fails ^[a-z]\\w{1,23}$"""
+      -> new Item { id:'a', prev:null, next:null }
 
 
       "Too long"
       """
       /ldc/src/Item.litcoffee Item()
-        config.uid fails ^[a-z]\\w{1,23}$"""
-      -> new Item { uid:'aBcDeFgHiJkLmNoPqRsT123_X', prev:null, next:null }
+        config.id fails ^[a-z]\\w{1,23}$"""
+      -> new Item { id:'aBcDeFgHiJkLmNoPqRsT123_X', prev:null, next:null }
 
 
       "Underscore is an invalid first character"
       """
       /ldc/src/Item.litcoffee Item()
-        config.uid fails ^[a-z]\\w{1,23}$"""
-      -> new Item { uid:'_abc', prev:null, next:null }
+        config.id fails ^[a-z]\\w{1,23}$"""
+      -> new Item { id:'_abc', prev:null, next:null }
 
 
       "Number is an invalid first character"
       """
       /ldc/src/Item.litcoffee Item()
-        config.uid fails ^[a-z]\\w{1,23}$"""
-      -> new Item { uid:'1abc', prev:null, next:null }
+        config.id fails ^[a-z]\\w{1,23}$"""
+      -> new Item { id:'1abc', prev:null, next:null }
 
 
       "Uppercase is an invalid first character"
       """
       /ldc/src/Item.litcoffee Item()
-        config.uid fails ^[a-z]\\w{1,23}$"""
-      -> new Item { uid:'Abc', prev:null, next:null }
+        config.id fails ^[a-z]\\w{1,23}$"""
+      -> new Item { id:'Abc', prev:null, next:null }
 
 
       "Must not contain a hyphen"
       """
       /ldc/src/Item.litcoffee Item()
-        config.uid fails ^[a-z]\\w{1,23}$"""
-      -> new Item { uid:'ab-c', prev:null, next:null }
+        config.id fails ^[a-z]\\w{1,23}$"""
+      -> new Item { id:'ab-c', prev:null, next:null }
 
 
 
@@ -147,35 +147,35 @@ Prepare test-instances.
       """
       /ldc/src/Item.litcoffee Item()
         config.prev is undefined and has no fallback"""
-      -> new Item { uid:'abc' }
+      -> new Item { id:'abc' }
 
 
       "Is string"
       """
       /ldc/src/Item.litcoffee Item()
         config.prev is type string not Item|null"""
-      -> new Item { uid:'abc', prev:'3' }
+      -> new Item { id:'abc', prev:'3' }
 
 
       "Is a number"
       """
       /ldc/src/Item.litcoffee Item()
         config.prev is type number not Item|null"""
-      -> new Item { uid:'abc', prev:3.5 }
+      -> new Item { id:'abc', prev:3.5 }
 
 
       "Is a generic object"
       """
       /ldc/src/Item.litcoffee Item()
         config.prev is type object not Item|null"""
-      -> new Item { uid:'abc', prev:{} }
+      -> new Item { id:'abc', prev:{} }
 
 
       "Does not inherit from Item"
       """
       /ldc/src/Item.litcoffee Item()
         config.prev is type object not Item|null"""
-      -> new Item { uid:'abc', prev:(new Ldc) }
+      -> new Item { id:'abc', prev:(new Ldc) }
 
 
     ];

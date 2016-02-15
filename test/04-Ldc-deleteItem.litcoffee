@@ -26,11 +26,11 @@ Prepare a test-instance.
 
 
 
-      "The `uid` argument accepts a string as expected"
+      "The `id` argument accepts a string as expected"
       tudor.equal
 
 
-      "Shortest possible uid"
+      "Shortest possible id"
       0
       (ldc) ->
         ldc.addItem 'Hat', {}, 'aB'
@@ -38,7 +38,7 @@ Prepare a test-instance.
         ldc.items._length
 
 
-      "Longest possible uid"
+      "Longest possible id"
       undefined
       (ldc) ->
         ldc.addItem 'Hat', {}, 'abcdefghijklmnopqrst123_'
@@ -48,14 +48,14 @@ Prepare a test-instance.
 
 
 
-      "`uid` exceptions"
+      "`id` exceptions"
       tudor.throw
 
 
       "Is an array"
       """
       /ldc/src/Ldc.litcoffee Ldc::deleteItem()
-        argument uid is type array not string"""
+        argument id is type array not string"""
       (ldc) ->
         ldc.addItem 'Hat', {}, 'abc123'
         ldc.deleteItem ['abc123']
@@ -64,56 +64,56 @@ Prepare a test-instance.
       "Empty string"
       """
       /ldc/src/Ldc.litcoffee Ldc::deleteItem()
-        argument uid fails ^[a-z]\\w{1,23}$"""
+        argument id fails ^[a-z]\\w{1,23}$"""
       (ldc) -> ldc.deleteItem ''
 
 
       "Too short"
       """
       /ldc/src/Ldc.litcoffee Ldc::deleteItem()
-        argument uid fails ^[a-z]\\w{1,23}$"""
+        argument id fails ^[a-z]\\w{1,23}$"""
       (ldc) -> ldc.deleteItem 'a'
 
 
       "Too long"
       """
       /ldc/src/Ldc.litcoffee Ldc::deleteItem()
-        argument uid fails ^[a-z]\\w{1,23}$"""
+        argument id fails ^[a-z]\\w{1,23}$"""
       (ldc) -> ldc.deleteItem 'aBcDeFgHiJkLmNoPqRsT123_X'
 
 
       "Underscore is an invalid first character"
       """
       /ldc/src/Ldc.litcoffee Ldc::deleteItem()
-        argument uid fails ^[a-z]\\w{1,23}$"""
+        argument id fails ^[a-z]\\w{1,23}$"""
       (ldc) -> ldc.deleteItem '_abc'
 
 
       "Number is an invalid first character"
       """
       /ldc/src/Ldc.litcoffee Ldc::deleteItem()
-        argument uid fails ^[a-z]\\w{1,23}$"""
+        argument id fails ^[a-z]\\w{1,23}$"""
       (ldc) -> ldc.deleteItem '1abc'
 
 
       "Uppercase is an invalid first character"
       """
       /ldc/src/Ldc.litcoffee Ldc::deleteItem()
-        argument uid fails ^[a-z]\\w{1,23}$"""
+        argument id fails ^[a-z]\\w{1,23}$"""
       (ldc) -> ldc.deleteItem 'Abc'
 
 
       "Must not contain a hyphen"
       """
       /ldc/src/Ldc.litcoffee Ldc::deleteItem()
-        argument uid fails ^[a-z]\\w{1,23}$"""
+        argument id fails ^[a-z]\\w{1,23}$"""
       (ldc) -> ldc.deleteItem 'ab-c'
 
 
       "Must exist in `items`"
       """
       /ldc/src/Ldc.litcoffee Ldc::deleteItem()
-        the Item with uid 'nope' does not exist"""
+        the Item with id 'nope' does not exist"""
       (ldc) -> ldc.deleteItem 'nope'
 
 
@@ -150,19 +150,19 @@ Prepare a test-instance.
 
       "...`items._first` is 'the_first'..."
       'the_first'
-      (ldc) -> ldc.items._first.uid
+      (ldc) -> ldc.items._first.id
 
       "...`items._last` is 'the_third'..."
       'the_third'
-      (ldc) -> ldc.items._last.uid
+      (ldc) -> ldc.items._last.id
 
       "...the first Item’s `next` is 'the_third'..."
       'the_third'
-      (ldc) -> ldc.items._first.next.uid
+      (ldc) -> ldc.items._first.next.id
 
       "...and the last Item’s `prev` is 'the_first'"
       'the_first'
-      (ldc) -> ldc.items._last.prev.uid
+      (ldc) -> ldc.items._last.prev.id
 
       "After deleting the first Item, the last Item’s `prev` is null..."
       null
@@ -170,7 +170,7 @@ Prepare a test-instance.
 
       "...and `items._first` is 'the_third'"
       'the_third'
-      (ldc) -> ldc.items._first.uid
+      (ldc) -> ldc.items._first.id
 
 
 

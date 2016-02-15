@@ -112,24 +112,24 @@ Prepare a test-instance.
 
 
 
-      "The `uid` argument accepts a string as expected"
+      "The `id` argument accepts a string as expected"
       tudor.equal
 
 
-      "Shortest possible uid"
+      "Shortest possible id"
       7
       (ldc) ->
         ldc.addItem 'Hat', undefined, 'aB'
         ldc.items._length
 
 
-      "Longest possible uid"
+      "Longest possible id"
       'abcdefghijklmnopqrst123_'
       (ldc) ->
         ldc.addItem 'Hat', {}, 'abcdefghijklmnopqrst123_'
 
 
-      "Can repeat existing uid, if case is different"
+      "Can repeat existing id, if case is different"
       9
       (ldc) ->
         ldc.addItem 'Hat', {}, 'aBcDeFgHiJkLmNoPqRsT123_'
@@ -138,70 +138,70 @@ Prepare a test-instance.
 
 
 
-      "`uid` exceptions"
+      "`id` exceptions"
       tudor.throw
 
 
       "Is boolean"
       """
       /ldc/src/Ldc.litcoffee Ldc::addItem()
-        argument uid is type boolean not string"""
+        argument id is type boolean not string"""
       (ldc) -> ldc.addItem 'Hat', {}, true
 
 
       "Empty string"
       """
       /ldc/src/Ldc.litcoffee Ldc::addItem()
-        argument uid fails ^[a-z]\\w{1,23}$"""
+        argument id fails ^[a-z]\\w{1,23}$"""
       (ldc) -> ldc.addItem 'Hat', {}, ''
 
 
       "Too short"
       """
       /ldc/src/Ldc.litcoffee Ldc::addItem()
-        argument uid fails ^[a-z]\\w{1,23}$"""
+        argument id fails ^[a-z]\\w{1,23}$"""
       (ldc) -> ldc.addItem 'Hat', {}, 'a'
 
 
       "Too long"
       """
       /ldc/src/Ldc.litcoffee Ldc::addItem()
-        argument uid fails ^[a-z]\\w{1,23}$"""
+        argument id fails ^[a-z]\\w{1,23}$"""
       (ldc) -> ldc.addItem 'Hat', {}, 'aBcDeFgHiJkLmNoPqRsT123_X'
 
 
       "Underscore is an invalid first character"
       """
       /ldc/src/Ldc.litcoffee Ldc::addItem()
-        argument uid fails ^[a-z]\\w{1,23}$"""
+        argument id fails ^[a-z]\\w{1,23}$"""
       (ldc) -> ldc.addItem 'Hat', {}, '_abc'
 
 
       "Number is an invalid first character"
       """
       /ldc/src/Ldc.litcoffee Ldc::addItem()
-        argument uid fails ^[a-z]\\w{1,23}$"""
+        argument id fails ^[a-z]\\w{1,23}$"""
       (ldc) -> ldc.addItem 'Hat', {}, '1abc'
 
 
       "Uppercase is an invalid first character"
       """
       /ldc/src/Ldc.litcoffee Ldc::addItem()
-        argument uid fails ^[a-z]\\w{1,23}$"""
+        argument id fails ^[a-z]\\w{1,23}$"""
       (ldc) -> ldc.addItem 'Hat', {}, 'Abc'
 
 
       "Must not contain a hyphen"
       """
       /ldc/src/Ldc.litcoffee Ldc::addItem()
-        argument uid fails ^[a-z]\\w{1,23}$"""
+        argument id fails ^[a-z]\\w{1,23}$"""
       (ldc) -> ldc.addItem 'Hat', {}, 'ab-c'
 
 
       "Must be unique"
       """
       /ldc/src/Ldc.litcoffee Ldc::addItem()
-        an Item with uid 'the_last' already exists"""
+        an Item with id 'the_last' already exists"""
       (ldc) ->
         ldc.addItem 'Hat' , {}, 'the_last'
         ldc.addItem 'Sine', {}, 'the_last'
@@ -215,11 +215,11 @@ Prepare a test-instance.
 
       "The first Item is 'the_first'"
       'the_first'
-      (ldc) -> ldc.items._first.uid
+      (ldc) -> ldc.items._first.id
 
       "The last Item is 'the_last'"
       'the_last'
-      (ldc) -> ldc.items._last.uid
+      (ldc) -> ldc.items._last.id
 
       "The first Item’s `prev` is null"
       null
@@ -231,11 +231,11 @@ Prepare a test-instance.
 
       "The first Item’s `next` is 'the_second'"
       'the_second'
-      (ldc) -> ldc.items._first.next.uid
+      (ldc) -> ldc.items._first.next.id
 
       "The last Item’s `prev` is 'aBcDeFgHiJkLmNoPqRsT123_'"
       'aBcDeFgHiJkLmNoPqRsT123_'
-      (ldc) -> ldc.items._last.prev.uid
+      (ldc) -> ldc.items._last.prev.id
 
 
 

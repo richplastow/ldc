@@ -159,8 +159,7 @@ Check the type and rule.
             return value
           if /^[A-Z]/.test type
             if _o.O != tv then continue
-            _o 'there!', type, value.C, eval "value instanceof #{type}" #@todo
-            if eval "value instanceof #{type}"
+            if eval "value instanceof #{type}" #@todo refactor to avoid `eval()`
               return value
 
         throw TypeError M + key + " is type #{tv} not #{types}"

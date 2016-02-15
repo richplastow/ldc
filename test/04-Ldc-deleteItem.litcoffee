@@ -119,7 +119,7 @@ Prepare a test-instance.
 
 
 
-      "`_first`, `_last`, `prev` and `next` as expected"
+      "`_length`, `_first`, `_last`, `prev` and `next` as expected"
       tudor.equal
 
 

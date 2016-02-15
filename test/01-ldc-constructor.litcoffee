@@ -26,15 +26,23 @@
       "Instance properties as expected"
 
 
-      "`Ldc::items` is an array"
-      _o.A
+      "`Ldc::items` is an object"
+      _o.O
       -> (new Ldc).items
 
       tudor.equal
 
       "`Ldc::items` is empty"
       0
-      -> (new Ldc).items.length
+      -> (new Ldc).items._length
+
+      "`Ldc::items` has no `_first` Item"
+      null
+      -> (new Ldc).items._first
+
+      "`Ldc::items` has no `_last` Item"
+      null
+      -> (new Ldc).items._last
 
 
     ];

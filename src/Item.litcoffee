@@ -32,10 +32,11 @@ Properties
         @uid = v 'uid <string ^[a-z]\\w{1,23}$>'
 
 
-#### `index <integer>`
+#### `prev, next <Item|null>`
 @todo describe
 
-        @index = v 'index <integer 0-9999>'
+        @prev = v 'prev <Item|null>'
+        @next = v 'next <Item|null>'
 
 
 

@@ -128,7 +128,7 @@ Creates a custom validator.
 
 Get `key`, `types` and `rule` from the signature. 
 
-        matches = signature.match /^([_a-z][_a-z0-9]*)\s+<([|a-z]+)\s*(.*)>$/
+        matches = signature.match /^([_a-z][_a-z0-9]*)\s+<([|a-z]+)\s*(.*)>$/i
         if ! matches then throw RangeError "/jsmultrun/src/_o-helpers.litcoffee
           _o.valid()\n  signature #{signature} is invalid"
         [signature, key, types, rule] = matches
@@ -157,6 +157,11 @@ Check the type and rule.
               unless RegExp(rule).test value
                 throw RangeError M + key + " fails #{rule}"
             return value
+          if /^[A-Z]/.test type
+            if _o.O != tv then continue
+            _o 'there!', type, value.C, eval "value instanceof #{type}" #@todo
+            if eval "value instanceof #{type}"
+              return value
 
         throw TypeError M + key + " is type #{tv} not #{types}"
 

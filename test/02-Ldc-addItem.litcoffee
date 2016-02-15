@@ -19,9 +19,9 @@ Prepare a test-instance.
       _o.F
       (ldc) -> ldc.addItem
 
-      "`addItem('Hat')` returns a string"
+      "`addItem('Hat',{},'the_first')` returns a string"
       _o.S
-      (ldc) -> ldc.addItem('Hat')
+      (ldc) -> ldc.addItem('Hat',{},'the_first')
 
 
 
@@ -32,12 +32,12 @@ Prepare a test-instance.
 
       "'Hat' is a recognized class-name"
       'Item.Hit.Hat'
-      (ldc) -> ldc.addItem('Hat'); ldc.items[ldc.items.length-1].C
+      (ldc) -> ldc.addItem('Hat',{},'the_second'); ldc.items._last.C
 
 
       "'Sine' is a recognized class-name"
       'Item.Tone.Sine'
-      (ldc) -> ldc.addItem('Sine'); ldc.items[ldc.items.length-1].C
+      (ldc) -> ldc.addItem('Sine'); ldc.items._last.C
 
 @todo more class-names
 
@@ -77,17 +77,17 @@ Prepare a test-instance.
 
       "An empty object"
       4
-      (ldc) -> ldc.addItem('Hat', {}); ldc.items.length
+      (ldc) -> ldc.addItem('Hat', {}); ldc.items._length
 
 
       "An object with arbitrary content"
       5
-      (ldc) -> ldc.addItem('Hat', { a:1, b:2 }); ldc.items.length
+      (ldc) -> ldc.addItem('Hat', { a:1, b:2 }); ldc.items._length
 
 
       "Can be undefined"
       6
-      (ldc) -> ldc.addItem('Hat', undefined); ldc.items.length
+      (ldc) -> ldc.addItem('Hat', undefined); ldc.items._length
 
 
 
@@ -120,7 +120,7 @@ Prepare a test-instance.
       7
       (ldc) ->
         ldc.addItem 'Hat', undefined, 'aB'
-        ldc.items.length
+        ldc.items._length
 
 
       "Longest possible uid"
@@ -133,7 +133,7 @@ Prepare a test-instance.
       9
       (ldc) ->
         ldc.addItem 'Hat', {}, 'aBcDeFgHiJkLmNoPqRsT123_'
-        ldc.items.length
+        ldc.items._length
 
 
 
@@ -196,6 +196,46 @@ Prepare a test-instance.
       /ldc/src/Ldc.litcoffee Ldc::addItem()
         argument uid fails ^[a-z]\\w{1,23}$"""
       (ldc) -> ldc.addItem 'Hat', {}, 'ab-c'
+
+
+      "Must be unique"
+      """
+      /ldc/src/Ldc.litcoffee Ldc::addItem()
+        an Item with uid 'the_last' already exists"""
+      (ldc) ->
+        ldc.addItem 'Hat' , {}, 'the_last'
+        ldc.addItem 'Sine', {}, 'the_last'
+
+
+
+
+      "`_first`, `_last`, `prev` and `next` as expected"
+      tudor.equal
+
+
+      "The first Item is 'the_first'"
+      'the_first'
+      (ldc) -> ldc.items._first.uid
+
+      "The last Item is 'the_last'"
+      'the_last'
+      (ldc) -> ldc.items._last.uid
+
+      "The first Item’s `prev` is null"
+      null
+      (ldc) -> ldc.items._first.prev
+
+      "The last Item’s `next` is null"
+      null
+      (ldc) -> ldc.items._last.next
+
+      "The first Item’s `next` is 'the_second'"
+      'the_second'
+      (ldc) -> ldc.items._first.next.uid
+
+      "The last Item’s `prev` is 'aBcDeFgHiJkLmNoPqRsT123_'"
+      'aBcDeFgHiJkLmNoPqRsT123_'
+      (ldc) -> ldc.items._last.prev.uid
 
 
 
